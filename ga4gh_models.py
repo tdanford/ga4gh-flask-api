@@ -1,4 +1,34 @@
 
+# 
+# GAReference
+# 
+
+class GAReference(object):
+    def __init__(self, id, length, md5checksum, name, sourceURI, sourceAccessions, 
+                 isDerived, sourceDivergence, ncbiTaxonId):
+        self.id = id
+        self.length = length
+        self.md5checksum = md5checksum
+        self.name = name
+        self.sourceAccessions = sourceAccessions
+        self.isDerived = isDerived
+        self.sourceDivergence = sourceDivergence
+        self.ncbiTaxonId = ncbiTaxonId
+
+def GAReference_from_json(json_object):
+    return GAReference(id=json_object['id'], 
+                       length=json_object['length'],
+                       md5checksum=json_object['md5checksum'],
+                       name=json_object['name'],
+                       sourceURI=json_object['sourceURI'],
+                       sourceAccessions=json_object['sourceAccessions'],
+                       isDerived=json_object['isDerived'],
+                       sourceDivergence=json_object['sourceDivergence'],
+                       ncbiTaxonId=json_object['ncbiTaxonId'])
+
+def decode_GAReference(json_string):
+    return JSONDecoder(object_hook=GAReference_from_json).decode(json_str)
+
 #
 # GACallSet
 #
